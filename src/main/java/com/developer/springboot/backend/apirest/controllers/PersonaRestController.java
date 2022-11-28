@@ -3,6 +3,8 @@ package com.developer.springboot.backend.apirest.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +31,13 @@ public class PersonaRestController {
 	@GetMapping("/personas")
 	public List<Persona> index() {
 		return personaService.findAll();
+
+	}
+	
+
+	@GetMapping("/personas/page/{page}")
+	public Page<Persona> index(@PathVariable Integer page) {
+		return personaService.findAll(PageRequest.of(page, 4));
 
 	}
 
